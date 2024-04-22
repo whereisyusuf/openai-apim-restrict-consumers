@@ -18,7 +18,7 @@
         <choose>
             <when condition="@(int.Parse((string)context.Variables["maxtokens"]) >= 100)">
                 <return-response>
-                    <set-status code="428" reason="Precondition Required" />
+                    <set-status code="429" reason="Max Tokens Reached" />
                     <set-body>@{ return "Max tokens limit reached"; }</set-body>
                 </return-response>
             </when>
