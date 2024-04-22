@@ -8,7 +8,7 @@ We create multiple products, each with threshold values of how many calls and to
 
 ## Custom Policy
 
-The custom policy checks for a context variable named `maxtokens`. If it is greater than or equal to 100, it sets a mock response with a response code of 428. Otherwise, it does nothing.
+The custom policy checks for a context variable named `maxtokens`. If it is greater than or equal to 100, it sets a response with a response code of 429. Otherwise, it does nothing.
 
 Here is the XML policy code:
 
@@ -18,7 +18,7 @@ Here is the XML policy code:
         <choose>
             <when condition="@((int)context.Variables["maxtokens"] >= 100)">
                 <return-response>
-                    <set-status code="428" reason="Precondition Required" />
+                    <set-status code="429" reason="Max tokens Reached" />
                     <set-body>@{ return "Max tokens limit reached"; }</set-body>
                 </return-response>
             </when>
@@ -37,7 +37,7 @@ We prioritize certain consumers by assigning them to products with higher thresh
 
 ## Restricting Consumers
 
-We restrict certain consumers by assigning them to products with lower threshold values. If they exceed these thresholds, they will receive a response with a status code of 428 (Precondition Required) or 429 (Too Many Requests), depending on whether they exceeded the token limit or the rate limit.
+We restrict certain consumers by assigning them to products with lower threshold values. If they exceed these thresholds, they will receive a response with a status code of 429 (Too Many Requests), depending on whether they exceeded the token limit or the rate limit.
 
 ## Getting Started
 
