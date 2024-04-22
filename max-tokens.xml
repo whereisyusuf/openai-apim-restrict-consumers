@@ -29,12 +29,17 @@
     </backend>
     <outbound>
         <base />
-        <cache-store-value key="maxtokens" value="@{
+        <choose>
+            <when condition="@(context.Response.StatusCode == 200)">
+                <cache-store-value key="maxtokens" value="@{
                     var prevmaxtokens=(string)context.Variables["maxtokens"];
                     var response=context.Response.Body.As<JObject>(preserveContent: true).SelectToken("usage.total_tokens").ToString();
                     var finaltokens=int.Parse(prevmaxtokens)+int.Parse(response);
                     return finaltokens.ToString();
                 }" duration="60" />
+            </when>
+            <otherwise />
+        </choose>
     </outbound>
     <on-error>
         <base />
