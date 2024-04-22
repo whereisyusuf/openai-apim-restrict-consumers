@@ -2,6 +2,8 @@
 
 This repository contains the API management policy for controlling access to OpenAI APIs. The policy is designed to prioritize certain consumers and restrict others based on the number of calls and tokens used.
 
+Please **NOTE**: This does not work with calls that are made with streaming APIs at the moment. It may also not cover edge cases where your current content may exceed the OpenAI limits and may result in a 429 error from OpenAI.   
+
 ## Overview
 
 We create multiple products, each with threshold values of how many calls and tokens it can process. There are rate limits and custom policies that evaluate if the number of calls or the max tokens has reached the threshold and respond accordingly.
