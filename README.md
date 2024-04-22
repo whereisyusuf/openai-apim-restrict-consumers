@@ -5,6 +5,7 @@ This repository contains the API management policy for controlling access to Ope
 ## Overview
 
 We create multiple products, each with threshold values of how many calls and tokens it can process. There are rate limits and custom policies that evaluate if the number of calls or the max tokens has reached the threshold and respond accordingly.
+For e.g. create a product of Max-Tokens-100 which will restrict the number of tokens used by the caller to 100. Use the cache policy to capture the token used and update it on each subsequent call. 
 
 ## Custom Policy
 
